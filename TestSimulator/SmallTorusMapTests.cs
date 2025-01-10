@@ -8,11 +8,8 @@ public class SmallTorusMapTests
     [Fact]
     public void Constructor_ValidSize_ShouldSetSize()
     {
-        // Arrange
         int size = 10;
-        // Act
         var map = new SmallTorusMap(size);
-        // Assert
         Assert.Equal(size, map.Size);
     }
 
@@ -23,8 +20,6 @@ public class SmallTorusMapTests
         Constructor_InvalidSize_ShouldThrowArgumentOutOfRangeException
         (int size)
     {
-        // Act & Assert
-        // The way to check if method throws anticipated exception:
         Assert.Throws<ArgumentOutOfRangeException>(() =>
              new SmallTorusMap(size));
     }
@@ -37,12 +32,9 @@ public class SmallTorusMapTests
     public void Exist_ShouldReturnCorrectValue(int x, int y,
         int size, bool expected)
     {
-        // Arrange
         var map = new SmallTorusMap(size);
         var point = new Point(x, y);
-        // Act
         var result = map.Exist(point);
-        // Assert
         Assert.Equal(expected, result);
     }
 
@@ -54,12 +46,9 @@ public class SmallTorusMapTests
     public void Next_ShouldReturnCorrectNextPoint(int x, int y,
         Direction direction, int expectedX, int expectedY)
     {
-        // Arrange
         var map = new SmallTorusMap(20);
         var point = new Point(x, y);
-        // Act
         var nextPoint = map.Next(point, direction);
-        // Assert
         Assert.Equal(new Point(expectedX, expectedY), nextPoint);
     }
 
@@ -71,12 +60,9 @@ public class SmallTorusMapTests
     public void NextDiagonal_ShouldReturnCorrectNextPoint(int x, int y,
         Direction direction, int expectedX, int expectedY)
     {
-        // Arrange
         var map = new SmallTorusMap(20);
         var point = new Point(x, y);
-        // Act
         var nextPoint = map.NextDiagonal(point, direction);
-        // Assert
         Assert.Equal(new Point(expectedX, expectedY), nextPoint);
     }
 }

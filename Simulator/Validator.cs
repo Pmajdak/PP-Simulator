@@ -24,20 +24,25 @@ public static class Validator
     }
     public static string Shortener(string value, int min, int max, char placeholder)
     {
-        string outputString = value;
+        string outputString = value.Trim();
+
         if (outputString.Length > max)
         {
-            outputString = outputString.Substring(0, max).TrimEnd();
+            outputString = outputString.Substring(0, max); 
         }
-        outputString = outputString.Trim();
+
         if (outputString.Length < min)
         {
-            outputString = outputString.PadRight(3, placeholder);
+            outputString = outputString.PadRight(min, placeholder);
         }
-        if (char.IsLower(outputString[0]))
+
+        if (!string.IsNullOrEmpty(outputString) && char.IsLower(outputString[0]))
         {
             outputString = char.ToUpper(outputString[0]) + outputString.Substring(1);
         }
+
         return outputString;
     }
+
+
 }
