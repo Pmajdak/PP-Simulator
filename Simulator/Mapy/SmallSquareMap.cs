@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Simulator.Maps;
-internal class SmallSquareMap : Map
+public class SmallSquareMap : Map
+
 {
     public int Size { get; }
     private readonly Rectangle _map;

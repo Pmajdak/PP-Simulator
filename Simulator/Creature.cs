@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 namespace Simulator;
 
 public abstract class Creature
@@ -32,7 +29,7 @@ public abstract class Creature
 
     public Creature() { }
 
-    public abstract void SayHi();
+    public abstract string Greeting();
 
     public abstract string Info { get; }
     
@@ -45,21 +42,17 @@ public abstract class Creature
             level++;
         }
     }
-    public void Go(Direction direction)
+    public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
+
+    public string[] Go(Direction[] directions)
     {
-        string directionName = direction.ToString().ToLower();
-        Console.WriteLine($"{Name} goes {directionName}.");
-    }
-    public void Go(Direction[] directions)
-    {
+        List<string> moves = new List<string>();
         foreach (Direction direction in directions)
         {
-            Go(direction);
+            moves.Add(Go(direction));
         }
+        return moves.ToArray();
     }
-    public void Go(string directions)
-    {
-        Go(DirectionParser.Parse(directions));
-    }
+    public string[] Go(string directions) => Go(DirectionParser.Parse(directions));
 
 }
