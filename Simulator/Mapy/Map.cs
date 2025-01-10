@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Simulator.Maps;
+﻿namespace Simulator.Maps;
 /// <summary>
 /// Map of points.
 /// </summary>
@@ -13,6 +7,23 @@ public abstract class Map
     public int SizeX { get; set; }
     public int SizeY { get; set; }
     public readonly Rectangle _map;
+
+    public abstract void Add(Creature creature, Point point);
+    public abstract void Remove(Creature creature, Point point);
+
+    public void Move(Creature creature, Point from, Point to)
+    {
+        Remove(creature, from);
+        Add(creature, to);
+    }
+
+    public abstract List<Creature> At(Point point);
+
+    public virtual List<Creature> At(int x, int y)
+    {
+        return At(new Point(x, y));
+    }
+
     protected Map(int sizeX, int sizeY)
     {
         if (sizeX < 5 || sizeY < 5)
