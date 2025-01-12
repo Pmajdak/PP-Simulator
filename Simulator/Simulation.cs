@@ -12,7 +12,14 @@ public class Simulation
     private int moveIndex = 0;
 
     public Creature CurrentCreature => Creatures[moveIndex % Creatures.Count];
-    public string CurrentMoveName => Moves[moveIndex % Moves.Length].ToString().ToLower();
+    public string CurrentMoveName
+    {
+        get
+        {
+            if (Finished) throw new InvalidOperationException("Blad! - Symulacja sie zakonczyla.");
+            return DirectionParser.Parse(Moves[moveIndex % Moves.Length].ToString())[0].ToString().ToLower();
+        }
+    }
 
     public Simulation(Map map, List<Creature> creatures, List<Point> positions, string moves)
     {
