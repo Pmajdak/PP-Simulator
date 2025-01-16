@@ -10,6 +10,8 @@ public abstract class Creature : IMappable
     private int level = 1;
 
     public abstract int Power { get; }
+    public virtual char Symbol => 'C';
+
     public Map? CurrentMap { get; private set; } = null;
     public Point CreaturePos { get; private set; }
     public string Name
