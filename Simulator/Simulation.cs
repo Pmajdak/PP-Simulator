@@ -4,14 +4,14 @@ using Simulator;
 public class Simulation
 {
     public Map Map { get; }
-    public List<Creature> Creatures { get; }
+    public List<IMappable> Creatures { get; }
     public List<Point> Positions { get; }
     public string Moves { get; }
     public bool Finished { get; private set; } = false;
 
     private int moveIndex = 0;
 
-    public Creature CurrentCreature => Creatures[moveIndex % Creatures.Count];
+    public IMappable CurrentCreature => Creatures[moveIndex % Creatures.Count];
     public string CurrentMoveName
     {
         get
@@ -21,7 +21,7 @@ public class Simulation
         }
     }
 
-    public Simulation(Map map, List<Creature> creatures, List<Point> positions, string moves)
+    public Simulation(Map map, List<IMappable> creatures, List<Point> positions, string moves)
     {
         if (!creatures.Any())
             throw new ArgumentException("Blad! - Lista stworow nie moze byc pusta.");

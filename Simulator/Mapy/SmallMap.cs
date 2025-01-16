@@ -3,7 +3,7 @@
 public abstract class SmallMap : Map
 {
     private const int MaxSize = 20;
-    private readonly List<Creature>?[,] _fields;
+    private readonly List<IMappable>?[,] _fields;
 
     protected SmallMap(int sizeX, int sizeY) : base(sizeX, sizeY)
     {
@@ -11,28 +11,28 @@ public abstract class SmallMap : Map
         {
             throw new ArgumentOutOfRangeException("Blad! - Maksymalny rozmiar mapy to 20 punktow.");
         }
-        _fields = new List<Creature>?[sizeX, sizeY];
+        _fields = new List<IMappable>?[sizeX, sizeY];
     }
 
-    public override void Add(Creature creature, Point point)
+    public override void Add(IMappable inter, Point point)
     {
         ValidatePoint(point);
 
-        _fields[point.X, point.Y] ??= new List<Creature>();
-        _fields[point.X, point.Y]!.Add(creature);
+        _fields[point.X, point.Y] ??= new List<IMappable>();
+        _fields[point.X, point.Y]!.Add(inter);
     }
 
-    public override void Remove(Creature creature, Point point)
+    public override void Remove(IMappable inter, Point point)
     {
-        _fields[point.X, point.Y]?.Remove(creature);
+        _fields[point.X, point.Y]?.Remove(inter);
     }
 
-    public override List<Creature> At(Point point)
+    public override List<IMappable> At(Point point)
     {
-        return _fields[point.X, point.Y] ?? new List<Creature>();
+        return _fields[point.X, point.Y] ?? new List<IMappable>();
     }
 
-    public override List<Creature> At(int x, int y) => At(new Point(x, y));
+    public override List<IMappable> At(int x, int y) => At(new Point(x, y));
 
     private void ValidatePoint(Point point)
     {

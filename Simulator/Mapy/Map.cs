@@ -1,4 +1,5 @@
 ﻿namespace Simulator.Maps;
+
 /// <summary>
 /// Map of points.
 /// </summary>
@@ -8,18 +9,21 @@ public abstract class Map
     public int SizeY { get; set; }
     public readonly Rectangle _map;
 
-    public abstract void Add(Creature creature, Point point);
-    public abstract void Remove(Creature creature, Point point);
+    public abstract void Add(IMappable inter, Point point);
+    public abstract void Remove(IMappable inter, Point point);
 
-    public void Move(Creature creature, Point from, Point to)
+    public void Move(IMappable inter, Point pos, Point nextpos)
     {
-        Remove(creature, from);
-        Add(creature, to);
+        Remove(inter, pos);
+        Add(inter, nextpos);
     }
 
-    public abstract List<Creature> At(Point point);
+    public virtual List<IMappable> At(Point point)
+    {
+        return new List<IMappable>();
+    }
 
-    public virtual List<Creature> At(int x, int y)
+    public virtual List<IMappable> At(int x, int y)
     {
         return At(new Point(x, y));
     }
@@ -34,24 +38,27 @@ public abstract class Map
         SizeY = sizeY;
         _map = new Rectangle(0, 0, SizeX - 1, SizeY - 1);
     }
+
     /// <summary>
-    /// Check if give point belongs to the map.
+    /// Check if given point belongs to the map.
     /// </summary>
     /// <param name="p">Point to check.</param>
     /// <returns></returns>
     public bool Exist(Point p)
     {
         return _map.Contains(p);
-    }    /// <summary>
-         /// Next position to the point in a given direction.
-         /// </summary>
-         /// <param name="p">Starting point.</param>
-         /// <param name="d">Direction.</param>
-         /// <returns>Next point.</returns>
-    public abstract Point Next(Point p, Direction d);
+    }
+
     /// <summary>
-    /// Next diagonal position to the point in a given direction 
-    /// rotated 45 degrees clockwise.
+    /// Next position to the point in a given direction.
+    /// </summary>
+    /// <param name="p">Starting point.</param>
+    /// <param name="d">Direction.</param>
+    /// <returns>Next point.</returns>
+    public abstract Point Next(Point p, Direction d);
+
+    /// <summary>
+    /// Next diagonal position to the point in a given direction rotated 45 degrees clockwise.
     /// </summary>
     /// <param name="p">Starting point.</param>
     /// <param name="d">Direction.</param>
