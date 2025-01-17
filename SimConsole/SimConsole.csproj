@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Simulator\Simulator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Simulator">
       <HintPath>..\Simulator\bin\Debug\net8.0\Simulator.dll</HintPath>
     </Reference>

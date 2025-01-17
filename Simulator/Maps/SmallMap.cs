@@ -1,6 +1,7 @@
-﻿namespace Simulator.Maps
+﻿using System.Text.Json.Serialization;
+
+namespace Simulator.Maps;
+
+public abstract class SmallMap(int sizeX, int sizeY) : Map(sizeX, sizeY, 20, 20)
 {
-    public abstract class SmallMap(int sizeX, int sizeY) : Map(sizeX, sizeY, 20, 20)
-    {
-    }
 }
